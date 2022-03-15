@@ -3,16 +3,17 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import User from "./models/user.js";
+import Mots from './models/mots.js'
 import bcrypt from "bcrypt";
 import cors from "cors"
 import jwt from 'jsonwebtoken';
 
 const secret = "secret123";
 
-await mongoose.connect('mongodb+srv://Mernadmin:Bh8O42qgwLTAuqAl@merndb.v5ytp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+await mongoose.connect('mongodb+srv://admin:zMse9srVW4ABuZjC@merngame.mj3ic.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection;
 db.on('error', console.log)
-
+// zMse9srVW4ABuZjC
 
 const app = express();
 
@@ -28,6 +29,20 @@ app.get('/', (req, res) => {
     res.send({ body: "ok" });
 })
 
+app.post('/addmots', (req,res) =>{
+    const {contenue} = req.body
+    Mots.findOne({contenue}).then(data =>{
+        if (data == null) {
+            const mots = new Mots({contenue: contenue})
+            mots.save() ;
+            res.json(mots)
+        }else{
+            res.sendStatus(500);
+        }
+    })
+})
+
+
 app.get('/user', (req, res) => {
     const payload = jwt.verify(req.cookies.token, secret);
     User.findById(payload.id)
@@ -35,6 +50,8 @@ app.get('/user', (req, res) => {
             res.json({ id: userInfo._id, email: userInfo.email });
         })
 })
+
+
 
 app.post('/register', (req, res) => {
     const { email, password } = req.body;
@@ -86,6 +103,7 @@ app.post('/login', (req, res) => {
             }
         })
 })
+
 
 app.post('/logout', (req, res) => {
     res.cookie('token', '').send();

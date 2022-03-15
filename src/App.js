@@ -6,6 +6,7 @@ import Home from './Containers/Home/Home';
 import Login from './Containers/Login/Login';
 import Register from './Containers/Register/Register';
 import Pendu from './Containers/Pendu/Pendu'
+import AddForm from './Containers/AddMots/Addmots'
 import Error404 from "./Components/Error404/Error404"
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
@@ -27,28 +28,29 @@ function App() {
         })
       });
 
-    
+
   }, [])
 
-console.log(email)
+  console.log(email)
   return (
 
     <div className="App">
-        <Navbar />
-        <div className="subnav">
-          <Routes>
-            <Route path="/" element={<Home />} />
+      <Navbar />
+      <div className="subnav">
+        <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/pendu" element={<Pendu />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="*" element={<Error404 />} />
-          </Routes>
-          <div>
-            {email && (<div> Logged in as {email}</div>)}
+          <Route path="/mots" element={<AddForm />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+        <div>
+          {email && (<div> Logged in as {email}</div>)}
 
-            {!email && (<div> Not logged in </div>)}
-          </div>
+          {!email && (<div> Not logged in </div>)}
         </div>
+      </div>
     </div>
   );
 }

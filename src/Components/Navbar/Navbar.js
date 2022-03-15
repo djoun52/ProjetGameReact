@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'; 
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ export default function Navbar() {
 
     const navigate = useNavigate()
 
-    
+
     const dispatch = useDispatch();
 
     const toggleNav = () => {
@@ -50,10 +50,8 @@ export default function Navbar() {
                     <li className="items">
                         <Link to='/'>Home</Link>
                     </li>
-                    <li className="items">
-                        <Link to='/pendu'>Pendu</Link>
-                    </li>
-                    
+
+
                     {!email && (
                         <>
                             <li className="items">
@@ -65,9 +63,14 @@ export default function Navbar() {
                         </>
                     )}
                     {email.length !== 0 && (
-                        <li className="items">
-                            <button onClick={logOut} className='btn-logout' onclick={logOut}>Log out</button>
-                        </li>
+                        <>
+                            <li className="items">
+                                <Link to='/pendu'>Pendu</Link>
+                            </li>
+                            <li className="items">
+                                <button onClick={logOut} className='btn-logout' onclick={logOut}>Log out</button>
+                            </li>
+                        </>
                     )}
                 </ul>
             )}
