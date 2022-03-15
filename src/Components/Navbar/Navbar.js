@@ -50,7 +50,10 @@ export default function Navbar() {
                     <li className="items">
                         <Link to='/'>Home</Link>
                     </li>
-
+                    <li className="items">
+                        <Link to='/pendu'>Pendu</Link>
+                    </li>
+                    
                     {!email && (
                         <>
                             <li className="items">

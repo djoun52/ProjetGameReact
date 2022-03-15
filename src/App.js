@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './Containers/Home/Home';
 import Login from './Containers/Login/Login';
 import Register from './Containers/Register/Register';
-// import UserContext from './UserContext';
+import Pendu from './Containers/Pendu/Pendu'
 import Error404 from "./Components/Error404/Error404"
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
@@ -38,6 +38,7 @@ console.log(email)
         <div className="subnav">
           <Routes>
             <Route path="/" element={<Home />} />
+          <Route path="/pendu" element={<Pendu />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="*" element={<Error404 />} />
